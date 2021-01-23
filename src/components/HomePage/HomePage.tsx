@@ -21,14 +21,7 @@ function HomePageContent() {
                             We Can Help
                             </Header>
                         <p style={{ fontSize: '1.33em' }}>
-                            No I can't, I am still learning and this is a huge world and I have a lot to learn still...
-                            </p>
-                        <Header as='h3' style={{ fontSize: '2em' }}>
-                            We Make Bananas That Can Dance
-                            </Header>
-                        <p style={{ fontSize: '1.33em' }}>
-                            Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-                            bioengineered.
+                            No I can't, I am still learning and this is a huge world and I don't get most of it...
                             </p>
                     </Grid.Column>
                     <Grid.Column floated='right' width={6}>
