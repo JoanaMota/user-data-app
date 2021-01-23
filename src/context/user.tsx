@@ -7,7 +7,7 @@ enum EGender {
 
 // ? Because they are not all used as props in SetCarButtons
 export interface IUser {
-    userId?: number;
+    userId: string;
     name?: string;
     gender?: string;
     amountCars?: number;
@@ -16,25 +16,25 @@ export interface IUser {
 }
 
 const mockUser = {} as IUser;
-mockUser.userId = 1;
+mockUser.userId = "1";
 mockUser.name = "Joana";
 mockUser.gender = ""
 mockUser.amountCars = 0;
 mockUser.carIndex = 0;
 mockUser.annualExpenses = 0;
 
-interface IUserContexInterface {
+interface IUserContextInterface {
     user: IUser;
     setUser: React.Dispatch<React.SetStateAction<IUser>>
-    setCarIdx: (index: number) => void
+    setAmountCarsData: (index: number) => void
     setUserData: (user: IUser) => void
 }
 
 // Create Context
-const UserContext = React.createContext<IUserContexInterface>({
+const UserContext = React.createContext<IUserContextInterface>({
     user: mockUser,
     setUser: () => ({}),
-    setCarIdx: () => [],
+    setAmountCarsData: () => [],
     setUserData: () => [],
 });
 
@@ -46,9 +46,9 @@ export interface Props {
 export default function UserProvider({ children }: Props) {
     const [user, setUser] = React.useState(mockUser);
 
-    function setCarIdx(index: number) {
+    function setAmountCarsData(index: number) {
         let userCopy = JSON.parse(JSON.stringify(user));
-        userCopy.carIndex = index;
+        userCopy.amountCars = index;
         setUser(userCopy);
     }
     function setUserData(user: IUser) {
@@ -59,7 +59,7 @@ export default function UserProvider({ children }: Props) {
     const hook = {
         user,
         setUser,
-        setCarIdx,
+        setAmountCarsData,
         setUserData
     };
 
@@ -69,7 +69,7 @@ export default function UserProvider({ children }: Props) {
 
 // Function to access the User Context on other components:
 export function useUserContext() {
-    return React.useContext<IUserContexInterface>(UserContext);
+    return React.useContext<IUserContextInterface>(UserContext);
 }
 // the choice for useContext instead of Consumer refer to:
 // https://stackoverflow.com/questions/56816374/context-consumer-vs-usecontext-to-access-values-passed-by-context-provider

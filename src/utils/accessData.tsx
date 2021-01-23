@@ -13,16 +13,10 @@ export async function getUserDataAPI(user: IUser): Promise<IUser> {
         },
     };
     const response = await API.get(apiName, path, myInit);
-    alert(JSON.stringify(response));
-    console.log(response);
-    // let userCopy = JSON.parse(JSON.stringify(user));
-    // userCopy = response;
-    // // userCopy.name = response.body.Name;
-    // // userCopy.gender = response.body.Gender;
-    // // userCopy.amountCars = response.body.AmountCars;
-    // // userCopy.annualExpenses = response.body.AnnualExpenses;
-    // console.log(userCopy);
-    return response.body;
+    let userCopy = {} as IUser;
+    alert(response.body);
+    userCopy = JSON.parse(response.body);
+    return userCopy;
 }
 
 export async function addUserDataAPI(user: IUser) {
@@ -31,7 +25,7 @@ export async function addUserDataAPI(user: IUser) {
     const myInit = {
         body: {
             "amountCars": user.amountCars,
-            "userId": "1001",
+            "userId": "100",
             "gender": user.gender,
             "annualExpenses": user.annualExpenses,
             "carIndex": 1,
@@ -46,7 +40,7 @@ export async function updateUserDataAPI(user: IUser) {
     const path = '/update-user-data';
     const myInit = {
         body: {
-            "userId": user.userId?.toString(),
+            "userId": user.userId,
             "name": user.name,
             "amountCars": user.amountCars,
             "annualExpenses": user.annualExpenses

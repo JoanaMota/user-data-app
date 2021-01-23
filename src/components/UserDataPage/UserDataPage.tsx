@@ -20,8 +20,8 @@ import { useUserContext, IUser } from '../../context/user';
 function UserDataPageContent() {
     const { user, setUserData } = useUserContext();
 
-    const [name, setName] = React.useState<string>(" ");
-    const [gender, setGender] = React.useState<string>(" ");
+    const [name, setName] = React.useState<string>("");
+    const [gender, setGender] = React.useState<string>("");
     const [amountCars, setAmountCars] = React.useState<number>(0);
     const [annualExpenses, setAnnualExpenses] = React.useState<number>(0);
 
@@ -38,11 +38,14 @@ function UserDataPageContent() {
         setAnnualExpenses(parseFloat(e.target.value));
     };
     //
+    // const getUserData = async (user: IUser) => {
     async function getUserData(user: IUser) {
-        let userCopy = JSON.parse(JSON.stringify(user));
+        console.log("Input User", user);
+        let userCopy = {} as IUser;
         userCopy = await getUserDataAPI(user);
-        // console.log(userCopy);
-        // console.log(userCopy.gender);
+        console.log("Output User", userCopy);
+        console.log("Output User type", typeof (userCopy));
+
         setUserData(userCopy);
     }
     async function updateContextAndUserData() {
@@ -51,9 +54,9 @@ function UserDataPageContent() {
         userCopy.gender = gender;
         userCopy.amountCars = amountCars;
         userCopy.annualExpenses = annualExpenses;
-        userCopy.userId = 1;
+        userCopy.userId = "1";
         await updateUserDataAPI(userCopy);
-        setUserData(user);
+        // setUserData(userCopy);
     };
     async function addUserData() {
         let userCopy = JSON.parse(JSON.stringify(user));
